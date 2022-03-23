@@ -1,0 +1,38 @@
+{% extends 'rail/basic.html' %}
+
+{% block title %} PNR Status {% endblock %}
+
+{% block body %} 
+    <div class="container"  style="padding-top: 180px;">
+     <div class="container my-2" style="background-color: papayawhip; padding: 20px; color: seagreen; border: 4px solid cadetblue;">
+        <h2 style="text-align: center;"><strong>Check your PNR status here:</strong></h2>
+        <form action="/rail/getpnrstatus/" method="post">{% csrf_token %}
+            <div class="row g-3" style="color: rgb(12, 12, 12); font-size: 5mm;">
+            <div class="col-12">
+              <label for="inputAddress" class="form-label">PNR Number</label>
+              <input type="number" class="form-control" id="pnr" name="pnr" placeholder="">
+            </div>
+            <div class="col-12">
+              <label for="inputAddress2" class="form-label">Aadhar card No.</label>
+              <input type="number" class="form-control" id="aadhar" name="aadhar" placeholder="">
+            
+              <div id="search">
+                <a href="/rail/getpnrstatus"><button type="submit" class="search-btn btn-danger my-3" name="search">Get Status</button></a>
+             </div>
+            </div>
+          </form>
+     </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+   <script>
+
+      {% if flag %}
+      alert('Please Enter Valid informations!');
+           // localStorage.clear();
+      document.location = "/rail/pnrstatus";
+      {% endif %}
+
+   </script>
+{% endblock %}

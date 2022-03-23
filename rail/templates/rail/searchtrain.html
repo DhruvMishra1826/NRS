@@ -1,0 +1,100 @@
+{% extends 'rail/basic.html' %}
+{% load static %}
+{% block title %} Get Train {% endblock %}
+
+{% block CSS %}
+.search-train{
+    margin: 125px auto;
+    display: grid;
+    grid-template-columns: 1.3fr 2fr 0.5fr;
+    background-color: white;
+    border-radius: 10px;
+    width: 90%;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    border-radius: 7px;
+}
+
+.search-btn{
+    background-color: red;
+    color: white;
+    width: 120px;
+    height: 50%;
+    margin: 16px 20px;
+    border: none;
+}
+
+.search-train>div{
+    margin-right: 10px;
+    margin-left: 0px;
+    padding: 10px;
+}
+
+.search-train input{
+    width: 100%;
+    padding: 5px;
+}
+
+p{
+    margin-top: 10px;
+    margin-bottom: 1rem;
+    line-height: 3px;
+}
+
+.site-logo{
+    margin: auto;
+    width: 40px;
+}
+
+.gray{
+    background-color: rgba(0,0,0,.05);
+    border-right: 1px dashed rgba(0,0,0,.2);
+}
+
+#search-by-name{
+    position: relative;
+}
+
+#error{
+    display: none;
+    position: absolute;
+    bottom: -34px;
+    border-radius: 10px;
+    padding: 5px;
+    background-color: red;
+    transition: 0.5s ease;
+}
+
+{% endblock %}
+
+{% block searchBox %}
+
+<div class="container"  style="padding-top: 80px;">
+<form action="/rail/searchtrainresult" method="get">{% csrf_token %}
+<div class="search-train">
+    
+      
+
+      <div class="gray">
+        <img src="{% static 'images/site-logo.png' %}" class="site-logo">
+        <p><strong>Search By Train Name/Number</strong></p>
+        <p>Get train route, fare</p>
+        </div>
+
+      <div id="search-by-name">
+        <p>Train Name/Number</p>
+        <input type="text" required placeholder="Enter train name" name="name">
+
+      <div id="search">
+       <a href="/rail/searchtrainresult"><button type="submit" class="search-btn">Search</button></a>
+      </div>
+    </div>
+</form>
+</div>
+<script>
+   
+</script>
+
+{% endblock %}

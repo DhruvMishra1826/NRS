@@ -1,0 +1,91 @@
+{% extends 'rail/basic.html' %}
+{% load static %}
+{% block title %} Get Train {% endblock %}
+{% block body %} 
+
+<div class="container" style="padding-top: 200px;">
+    <div class="container" style="background-color: rgb(236, 235, 226); padding: 15px; border: 5px solid cadetblue;">
+        <h1 style="text-align: center; color: rgb(9, 151, 16);"><strong>Train Overview:</strong></h1>
+        {% for name,source,destination,seats,fare,depart,arrival in allTrains %}
+        <div class="cards my-2" style="border: 4px solid black; padding: 5px; padding: 12px;">
+            
+            <div class="card-title" style="padding: 2px;">
+               <span style="color: indigo; font-size: 8mm;"><strong  id="name{{forloop.counter}}">{{name}}</strong></span>
+            </div>
+            <hr>
+            <div class="card-sub-title" >
+                <strong>Source Station: </strong><span id="source{{forloop.counter}}">{{source}}</span>
+            </div>
+            <div class="card-sub-title">
+                <strong>Terminal Station: </strong><span  id="destination{{forloop.counter}}">{{destination}}</span>
+            </div>
+            <div class="card-sub-title" >
+                <strong>Total Fare: Rs. </strong><span id="fare{{forloop.counter}}">{{fare}}</span>
+            </div>
+            <div class="card-sub-title" >
+                <strong>Seats Available: </strong> <span id="seat{{forloop.counter}}">{{seats}}</span>
+            </div>
+            <div class="card-sub-title" >
+                <strong>Origin Time: </strong><span id="depart{{forloop.counter}}">{{depart}}</span>
+            </div>
+            <div class="card-sub-title" >
+                <strong>Destination Arrival Time: </strong><span id="arrival{{forloop.counter}}">{{arrival}}</span>
+            </div>
+            
+            <a href="/rail/booktrain"><button  type="submit" id="book{{forloop.counter}}" class="btn btn-success cart my-3" style="background-color: #3ab18a;">Book Train</button></a>
+            
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+    {% endblock %}
+
+    {% block js %}
+    <script>
+ 
+       
+       if (localStorage.getItem('cart')==null){
+         val=0;
+         var cart = {};
+       }
+       else{
+         
+       cart = JSON.parse(localStorage.getItem('cart'));
+       }
+       
+     
+       let temp= document.querySelectorAll(".cart")
+       Array.from(temp).forEach((element)=>{
+             element.addEventListener('click',()=>{
+                 let val=element.id;
+                 let ck=val;
+                 val=ck.substring(4,);
+                 
+                     let name = document.getElementById('name'+val).innerText;
+                     let source = document.getElementById('source'+val).innerText;
+                     let destination= document.getElementById('destination'+val).innerText;
+                     let fare = document.getElementById('fare'+val).innerText;
+                     let seats = document.getElementById('seat'+val).innerText;
+                     let depart = document.getElementById('depart'+val).innerText;
+                     let arrival = document.getElementById('arrival'+val).innerText;
+ 
+                     localStorage.setItem("name",name);
+                     localStorage.setItem("source",source);
+                     localStorage.setItem("destination",destination);
+                     localStorage.setItem("fare",fare);
+                     localStorage.setItem("seats",seats);
+                     localStorage.setItem("depart",depart);
+                     localStorage.setItem("arrival",arrival);
+               
+             })
+       })
+ 
+      {% if ticketstatus %}
+      alert('No information available for the entered Train name, please input a valid train name. Thank You!');
+           // localStorage.clear();
+      document.location = "/rail/searchtrain";
+      {% endif %}
+    
+    </script>
+ {% endblock %}

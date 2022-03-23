@@ -1,0 +1,124 @@
+{% extends 'rail/basic.html' %}
+
+{% block title %} National Railways {% endblock %}
+
+{% block CSS %}
+
+.book-train{
+  margin: 125px auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 0.5fr;
+    background-color: white;
+    border-radius: 10px;
+    width: 90%;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    border-radius: 7px;
+}
+
+.search-btn{
+    background-color: red;
+    color: white;
+    width: 120px;
+    height: 50%;
+    margin: 16px 20px;
+    border: none;
+}
+
+.book-train>div{
+    margin-right: 10px;
+    margin-left: 12px;
+    padding: 10px;
+}
+
+.book-train input{
+    width: 100%;
+    padding: 5px;
+}
+
+p{
+    margin-top: 10px;
+    margin-bottom: 1rem;
+    line-height: 3px;
+}
+
+
+{% endblock %}
+
+
+{% block searchBox %}
+<div id="error-login"><p style="color: white;">{{error}}</p></div>
+<div class="container" style="padding-top: 50px;">
+<form action="/rail/searchresult" method="get">{% csrf_token %}
+<div class="book-train" name="book">
+    
+      
+
+      <div id="source">
+        <p>From</p>
+        <input type="text" placeholder="Leaving From" name="source">
+      </div>
+    
+      <div id="destination">
+        <p>To</p>
+        <input type="text" placeholder="Going To" name="destination">
+      </div>
+    
+      <div id="date">
+        <p>Date</p>
+        <input type="date" name="date">
+      </div>
+    
+      <div id="search">
+        <a href="/rail/searchresult"><button type="submit" class="search-btn" name="search">Search</button></a>
+      </div>
+    </div>
+</form>
+</div>   
+<div class="why-nrs " style="padding-top: 30px;">
+  <h2 class="why-nrs-main-heading">Why Book IRCTC Train Tickets on NRS?</h2>
+  <div class="why-nrs-sub-heading">
+    <span>Official IRCTC Ticket Booking Partner</span>
+  </div>
+
+  <div class="why-nrs-container">
+    <div class="widget-item-content-row">
+      <img class="" src="https://images.ixigo.com/image/upload/f_auto/train/ecb835b55223186c49d55750b422ed10-oscpe.png" alt="benefit_0" width="70" height="70">
+      <div class="widget-item-content-text">
+        <div class="tile-heading">
+          <b><span>₹</span>0 Service Charge on your 1st booking</b>
+        </div>
+      </div>
+    </div>
+
+    <div class="widget-item-content-row">
+      <img class="" src="https://images.ixigo.com/image/upload/f_auto/train/8c833f43b5d07c7d67d82e26f7bccd26-xpoln.png" alt="benefit_1" width="70" height="70">
+      <div class="widget-item-content-text">
+        <div class="tile-heading">
+          <b>Hassle-Free Cancellation of IRCTC Train Tickets</b>
+        </div>
+      </div>
+    </div>
+
+    <div class="widget-item-content-row">
+      <img class="" src="https://images.ixigo.com/image/upload/f_auto/train/a21427142a38e7331574b034aa4a687a-lwpxr.png" alt="benefit_2" width="70" height="70">
+      <div class="widget-item-content-text">
+        <div class="tile-heading">
+          <b>Instant Refund on IRCTC Train Reservation Cancellation</b>
+        </div>
+      </div>
+    </div>
+
+    <div class="widget-item-content-row">
+      <img class="" src="https://images.ixigo.com/image/upload/f_auto/train/d522fcf3866c18b343060ab3cb49b3b1-xnmqx.png" alt="benefit_3" width="70" height="70">
+      <div class="widget-item-content-text">
+        <div class="tile-heading">
+          <b>24*7 Support for IRCTC Train Ticket Booking</b>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

@@ -1,0 +1,117 @@
+{% extends 'rail/basic.html' %}
+
+{% block title %} Book Your Train {% endblock %}
+
+{% block body %}  
+    <div class="container" style="padding-top: 250px;">
+    <div class="container" style="background-color: #fdfce4; border: 5px solid rgb(57, 204, 12); padding: 19px;">
+        
+        <div class="col my-4">
+            <h2 style="color: green; font-weight: bold; text-align: center;">Enter your credentials:</h2>
+            <form method="post" action="/rail/booktrain/">{% csrf_token %}
+                <input type="hidden" name="itemsJson" id="itemsJson">
+                <input type="hidden" name="amount" id="amount">
+                <div class="form-row my-4">
+                    <div class="form-group col-md-6">
+                        <label for="inputname">Name</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Name">
+                    </div>
+                    <div class="form-group col-md-6 my-3">
+                        <label for="inputEmail4">Age</label>
+                        <input type="number" class="form-control" id="age" name="age" placeholder="Age">
+                    </div>
+                </div>
+                <div class="form-group my-3">
+                    <label for="inputAddress">Gender</label>
+                    <input type="text" class="form-control" id="gender" name="gender" placeholder="Male/Female">
+                </div>
+                <div class="form-group my-3">
+                    <label for="inputAddress2">Aadhar No.</label>
+                    <input type="number" class="form-control" id="aadhar" name="aadhar" placeholder="50042345">
+                </div>
+                <div class="form-row my-3">
+                    <div class="form-group col-md-6">
+                        <label for="inputCity">Source City</label>
+                        <input type="text" class="form-control" id="sourcecity" name="sourcecity" placeholder="New Delhi" value="">
+                    </div>
+                    <div class="form-group col-md-4 my-3">
+                        <label for="inputState">Destination City</label>
+                        <input type="text" class="form-control" id="destinationcity" name="destinationcity" placeholder="New Delhi" value="">
+                    </div>
+                    <div class="form-group col-md-4 my-3">
+                        <label for="inputState">Train Name</label>
+                        <input type="text" class="form-control" id="trainname" name="trainname" placeholder="Rajdhani Express">
+                    </div>
+                    <div class="form-group col-md-4 my-3">
+                        <label for="inputState">Journey Fare</label>
+                        <input type="text" class="form-control" id="fare" name="fare" placeholder="" value="">
+                    </div>
+                    <div class="form-group col-md-2 my-3">
+                        <label for="inputZip">Date of Journey</label>
+                        <input type="date" class="form-control" id="date" name="date">
+                    </div>
+                </div>
+                <div class="form-group my-3">
+                        <label for="inputZip">Phone Number</label>
+                        <input type="tel" class="form-control" id="phone" name="phone">
+                    </div>
+                <button type="submit" class="btn btn-success col-md-4 my-5 cart">Book Now</button>
+            </form>
+        </div>
+    </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+   <script>
+      
+      let curr = document.getElementById('trainname');
+      curr.setAttribute("value",localStorage['name']);
+
+      let curr1 = document.getElementById('sourcecity');
+      curr1.setAttribute("value",localStorage['source']);
+
+      let curr2 = document.getElementById('destinationcity');
+      curr2.setAttribute("value",localStorage['destination']);
+
+      let curr3 = document.getElementById('fare');
+      curr3.setAttribute("value",localStorage['fare']);
+      
+
+    //   let temp= document.querySelectorAll(".cart")
+    //   Array.from(temp).forEach((element)=>{
+    //         element.addEventListener('click',()=>{
+
+    //                 let name = document.getElementById('name').innerText;
+    //                 let source = document.getElementById('sourcecity').innerText;
+    //                 let destination= document.getElementById('destinationcity').innerText;
+    //                 let fare = document.getElementById('fare').innerText;
+    //                 let trainname = document.getElementById('trainname').innerText;
+    //                 let age = document.getElementById('age').innerText;
+    //                 let gender = document.getElementById('gender').innerText;
+    //                 let aadhar = document.getElementById('aadhar').innerText;
+    //                 let date = document.getElementById('date').innerText;
+    //                 let phone = document.getElementById('phone').innerText;
+
+    //                 localStorage.setItem("name",name);
+    //                 localStorage.setItem("sourcecity",source);
+    //                 localStorage.setItem("destinationcity",destination);
+    //                 localStorage.setItem("fare",fare);
+    //                 localStorage.setItem("trainname",trainname);
+    //                 localStorage.setItem("age",age);
+    //                 localStorage.setItem("gender",gender);
+    //                 localStorage.setItem("aadhar",aadhar);
+    //                 localStorage.setItem("date",date);
+    //                 localStorage.setItem("phone",phone);
+       
+    //             })
+    //   })
+
+      {% if ticketstatus %}
+            alert('Thanks for booking your ticket with us. Your pnr is is {{ id|add:"5000" }}. Please get your ticket from the counter');
+           // localStorage.clear();
+            document.location = "/rail";
+      {% endif %}
+   
+   </script>
+{% endblock %}

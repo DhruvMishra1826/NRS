@@ -1,0 +1,44 @@
+{% extends 'rail/basic.html' %}
+
+{% block title %} PNR Status {% endblock %}
+
+{% block body %} 
+<div class="container" style="padding-top: 200px;">
+     <div class="container my-2" style="background-color: papayawhip; padding: 20px; color: rgb(12, 12, 12); border: 4px solid cadetblue;">
+        <h2 style="text-align: center;"><strong>Ticket / Current PNR Status:</strong></h2>
+        <h1 style="color: yellow;">{{allTrains.length}}</h1>
+        {% for name,gender,age,aadhar,train_name,date,source,destination,reservation_status,seat_no,pnr_no,fare in allTrains %}
+        <div class="card" style="border: 4px solid black;">
+            <h5 class="card-header" style="color: violet;" ><strong id="name" name="name">{{name}}'s ticket</strong></h5>
+            <div class="card-body">
+              <h5 class="card-title" style="color: slateblue;"><strong>Passenger Details:</strong></h5>
+               <hr>
+              <p class="card-text  "><strong>Gender:</strong> {{gender}}</p>
+              <p class="card-text"><strong>Train Name:</strong> {{train_name}}</p>
+              <p class="card-text"><strong>Source Station:</strong> {{source}}</p>
+              <p class="card-text"><strong>Destination Station:</strong> {{destination}}</p>
+              <p class="card-text"><strong>Reservation Status:</strong> {{reservation_status}}</p>
+              <p class="card-text"><strong>Seat No:</strong> {{seat_no}}</p>
+              <p class="card-text"><strong>PNR No:</strong> {{pnr_no}}</p>
+              <p class="card-text"><strong>Ticket Fare:</strong>{{fare}}</p>
+              <a href="#" class="btn btn-danger my-3" id="cancel"style="float:inline-start;">Cancel Ticket</a>
+            </div>
+          </div>
+          {% endfor %}
+     </div>
+    </div>   
+     
+{% endblock %}
+
+{% block js %}
+   <script>
+    
+      let curr = document.getElementById('cancel');
+      curr.addEventListener(('click'),()=>{
+        alert('Your Ticket Successfully Cancelled');
+        document.location = "/rail";
+    })
+    
+   
+   </script>
+{% endblock %}
